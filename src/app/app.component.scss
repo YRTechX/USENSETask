@@ -1,0 +1,47 @@
+input {
+    padding: 8px 16px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    &:focus {
+        outline: none;
+    }
+}
+div {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.section {
+    width: 50px;
+    height: 10px;
+    background-color: gray;
+}
+.easy .section:first-child {
+    background-color: red;
+}
+.medium .section:nth-child(1),
+.medium .section:nth-child(2) {
+    background-color: yellow;
+}
+
+.strong .section {
+    background-color: green;
+}
+.short .section {
+    background-color: red;
+}
+.wrapper{
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+label{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
