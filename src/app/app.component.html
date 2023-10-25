@@ -1,8 +1,7 @@
-<div class="wrapper">
+<div class="wrapper" [formGroup]="passwordForm">
   <div class="inner">
     <label for="password">Enter Password:</label>
-    <input type="password" id="password" [(ngModel)]="password" />
-
+    <input type="password" id="password" formControlName="password" />
     <div [ngClass]="getPasswordStrength()">
       <div class="section"></div>
       <div class="section"></div>

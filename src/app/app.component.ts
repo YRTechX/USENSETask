@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { PasswordService } from 'src/services/passwordStrengthService';
 
 @Component({
   selector: 'app-root',
@@ -6,30 +8,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angulartask'
-  password: string = ''
-  error = ''
+  title = 'angulartask';
+  passwordForm: FormGroup;
+  error: string = '';
+
+  constructor(private fb: FormBuilder, private passwordService: PasswordService) {
+    this.passwordForm = this.fb.group({
+      password: [''],
+    });
+  }
 
   getPasswordStrength(): string {
-    const lengthCondition = this.password.length >= 8
-    const hasLetters = /[a-zA-Z]/.test(this.password)
-    const hasDigits = /\d/.test(this.password)
-    const hasSymbols = /[!@#$%^&*(),.?":{}|<>]/.test(this.password)
-    if(!lengthCondition && this.password.trim().length){
-      this.error = 'The password is too short'
-      return 'short'
-    } 
-     if (hasLetters && hasDigits && hasSymbols) {
-      this.error = 'The password is strong'
-      return 'strong'
-    } else if ((hasLetters && hasDigits) || (hasLetters && hasSymbols) || (hasDigits && hasSymbols)) {
-      this.error = 'The password is medium'
-      return 'medium'
-    } else if (hasLetters || hasDigits || hasSymbols) {
-      this.error = 'The password is easy'
-      return 'easy'
-    }
-    this.error = 'The password is empty'
-    return ''
+    const password = this.passwordForm.get('password')?.value;
+    this.error = this.passwordService.getPasswordStrength(password);
+    return this.error;
   }
 }
